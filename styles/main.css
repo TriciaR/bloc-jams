@@ -27,9 +27,13 @@ body {
   left: 2rem;
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 64rem;
+.hero-content {
+  position: relative;
+  min-height: 600px;
+  background-image: url("../assets/images/bloc_jams_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 /*MEDIUM screens 640px ie tablets,iPads*/
@@ -61,6 +65,9 @@ body {
    display: table;
 }
 
-.clearfix::after {
-   clear: both;
+.ion-music-note,
+.ion-radio-waves,
+.ion-iphone {
+  color: rgb(233,50,117);
+  font-size: 5rem;
 }
