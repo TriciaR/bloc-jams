@@ -38,6 +38,16 @@ body.landing {
   padding: 2rem;
   /* width: 33.3%;  now applied in column & container class*/
   text-align: center;
+  opacity: 0;
+  -webkit-transform: scaleX(0.9) translateY(3rem);
+  -moz-transform: scaleX(0.9) translateY(3rem);
+  transform: scaleX(0.9) translateY(3rem);
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  -webkit-transition-delay: 0.2s;
+  -moz-transition-delay: 0.2s;
+  transition-delay: 0.2s;
 }
 
 .point .point-title {
@@ -50,4 +60,3 @@ body.landing {
   color: rgb(233, 50, 117);
   font-size: 5rem;
 }
-
