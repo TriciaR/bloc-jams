@@ -9,7 +9,6 @@ var revealPoint = function(point) {
 
 var animatePoints = function(points) {
   forEach(points, revealPoint);
-  // I don'tknow how to proceed with the callback here...I think it's the  revealPoints
 };
 window.onload = function() {
   if (window.innerHeight > 950) {
