@@ -15,13 +15,18 @@ var collectionItemTemplate =
    ;
 
 window.onload = function() {
-    // #1
+
+    // #1 we select the first (and only, as we've designed it) element with an album-covers class name. We assign this specified element to a variable named collectionContainer
+   
     var collectionContainer = document.getElementsByClassName('album-covers')[0];
-    // #2
-    collectionContainer.innerHTML = '';
-    // #3
     
-    for (var i = 0; i < 12; i++) {
+    // #2 We assign an empty string to collectionContainer's innerHTML property to clear its content. This ensures we're working with a clean slate before we insert content with JavaScript
+    
+    collectionContainer.innerHTML = '';
+    
+    // #3 create a for loop that inserts 12 albums using the += operator, which appends content to strings. Each loop adds the contents of  collectionItemTemplate (the template) to the innerHTML of collectionContainer, thereby generating the albums that display on the collection page
+    
+        for (var i = 0; i < 12; i++) {
         collectionContainer.innerHTML += collectionItemTemplate;
     }
 }
