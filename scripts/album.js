@@ -36,7 +36,8 @@ var albumMarconi = {
 };
 // Assignment#11
 
-var albumClementi =  title: 'Sonatinas',
+var albumClementi = {
+  title: 'Sonatinas',
   artist: 'Muzio Clementi',
   label: 'Classical',
   year: '1793',
@@ -48,6 +49,7 @@ var albumClementi =  title: 'Sonatinas',
     { title: 'Sonatina Clementi: Opus 36, No. 4 - Con Spirito, Andante Con Espressione and Rondo (Allegro Vivace)', duration: '3:21' },
     { title: 'Sonatina Clementi: Opus 36, No. 5 - Presto, Air Suisse and Rondo', duration: '2:15' }    
   ]
+};
 
 
 };
