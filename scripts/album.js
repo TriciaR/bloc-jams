@@ -52,7 +52,6 @@ var albumClementi = {
 };
 
 
-};
 // create a function named createSongRow that generates the song row content 
 // must declare the objects before the function because the createSongRow function uses the information stored in the album objects.
 
