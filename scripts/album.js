@@ -100,15 +100,15 @@ window.onload = function() {
 
   // Add an event listener to the album cover. When a user clicks it, the album page content should toggle between the three album objects: albumPicasso, albumMarconi, and your album object.
     
-    var albums = [albumClementi, albumPicasso, albumMarconi];
+    var albums = [albumPicasso, albumMarconi, albumClementi];
     var index = 1;
     // i is declared OUTSIDE of function so it increases by 1 , that state is remembered and carried to next event
     albumImage.addEventListener("click", function(event){
       setCurrentAlbum(albums[index]);
       index++;
       // click, to set current album @ index i
-        if (index == albums.length) {
-          index = 0;
-        } 
-      }); 
+      if (index == albums.length) {
+        index = 0;
+      } 
+    }); 
 };
