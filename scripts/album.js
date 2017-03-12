@@ -34,7 +34,23 @@ var albumMarconi = {
     { title: 'Wrong phone number', duration: '2:15' }    
   ]
 };
+// Assignment#11
 
+var albumClementi =  title: 'Sonatinas',
+  artist: 'Muzio Clementi',
+  label: 'Classical',
+  year: '1793',
+  albumArtUrl: 'assets/images/album_covers/Muzio_Clementi.jpg',
+  songs: [
+    { title: 'Sonatina Clementi: Opus 36, No. 1 - Spiritoso, Andante and Vivace', duration: '4:26' },
+    { title: ' Sonatina Clementi: Opus 36, No. 2 - Allegretto, Allegretto and Allegro', duration: '3:14' },
+    { title: 'Sonatina Clementi: Opus 36, No. 3 - Spiritoso, Un Poco Adagio and Allegro', duration: '5:01' },
+    { title: 'Sonatina Clementi: Opus 36, No. 4 - Con Spirito, Andante Con Espressione and Rondo (Allegro Vivace)', duration: '3:21' },
+    { title: 'Sonatina Clementi: Opus 36, No. 5 - Presto, Air Suisse and Rondo', duration: '2:15' }    
+  ]
+
+
+};
 // create a function named createSongRow that generates the song row content 
 // must declare the objects before the function because the createSongRow function uses the information stored in the album objects.
 
@@ -78,6 +94,19 @@ var setCurrentAlbum = function(album) {
   }
 };
  
- window.onload = function() {
+window.onload = function() {
      setCurrentAlbum(albumPicasso);
- };
+
+  // Add an event listener to the album cover. When a user clicks it, the album page content should toggle between the three album objects: albumPicasso, albumMarconi, and your album object.
+    var albumToggle = [albumClementi, albumPicasso, albumMarconi];
+    albumImage.addEventListener("click", function(){
+      setCurrentAlbum(albumToggle[i]);
+      // click, to set current album @ index i
+      for( var i = 0; i < albumToggle.length; i++) {
+        if (i < albumToggle.length) {
+          setCurrentAlbum(albumToggle[i]);
+          i++;
+        } else { setCurrentAlbum(albumToggle[0]); }
+            }
+    ); 
+};
