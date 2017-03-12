@@ -40,10 +40,10 @@ var albumMarconi = {
 
 var createSongRow = function(songNumber, songName, songLength) {
   var template = 
-  '<tr class="album-view-song-item">'
-    +'<td class="song-item-number">' + songNumber + '</td>'
-    +'<td class="song-item-title">' + songName + '</td>'
-    +'<td class="song-item-duration">' + songLength + '</td>'
+    '<tr class="album-view-song-item">'
+    +'  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
+      +'<td class="song-item-title">' + songName + '</td>'
+      +'<td class="song-item-duration">' + songLength + '</td>'
     +'</tr>'
     ;  //why can't this go on above line after the closing </tr> tag?
     
@@ -54,7 +54,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 // create a function named setCurrentAlbum that the program calls when the window loads. It will take one of our album objects as an argument and will utilize the object's stored information by injecting it into the template
 
 var setCurrentAlbum = function(album) {
-  // select all of the HTML elements required to display on the album page: title, artist, release info, image, and song list. To populate these elements with information, assign the corresponding values of the album objects' properties to the HTML elements
+  // select all of the HTML elements required to display on the albuam page: title, artist, release info, image, and song list. To populate these elements with information, assign the corresponding values of the album objects' properties to the HTML elements
   var albumTitle = document.getElementsByClassName('album-view-title')[0];
   var albumArtist = document.getElementsByClassName('album-view-artist')[0];
   var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
@@ -78,6 +78,31 @@ var setCurrentAlbum = function(album) {
   }
 };
  
+// Elements we'll be adding listeners to
+ var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+ var songRows = document.getElementsByClassName('album-view-song-item');
+
+ 
+ // Album button templates
+ var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
+
  window.onload = function() {
-     setCurrentAlbum(albumPicasso);
+    setCurrentAlbum(albumPicasso);
+ 
+    songListContainer.addEventListener('mouseover', function(event) {
+        // the target property on the event object (above) stores the DOM element where the event occurred. Enable Live Preview and open up the Developer Console. Mouse over the table, and the element where the event is dispatched will be logged to the console.
+                 // Only target individual song rows during event delegation
+         if (event.target.parentElement.className === 'album-view-song-item') {
+            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+         }
+    });
+
+   for (var i = 0; i < songRows.length; i++) {
+     songRows[i].addEventListener('mouseleave', function(event) {
+         // Selects first child element, which is the song-item-number element
+         this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+     });
+   }
+
  };
