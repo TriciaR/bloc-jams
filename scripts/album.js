@@ -69,14 +69,15 @@ var createSongRow = function(songNumber, songName, songLength) {
 };
 
 // create a function named setCurrentAlbum that the program calls when the window loads. It will take one of our album objects as an argument and will utilize the object's stored information by injecting it into the template
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+require('./../album.html')
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
 var setCurrentAlbum = function(album) {
   // select all of the HTML elements required to display on the album page: title, artist, release info, image, and song list. To populate these elements with information, assign the corresponding values of the album objects' properties to the HTML elements
-  var albumTitle = document.getElementsByClassName('album-view-title')[0];
-  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-  var albumImage = document.getElementsByClassName('album-cover-art')[0];
-  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
 //  the firstChild property identifies the first child node of an element, and nodeValue returns or sets the value of a node. Alternatively, we could technically use innerHTML to insert plain text (like we did in collection.js), but it's excessive and semantically misleading in this context because we aren't adding any HTML
   albumTitle.firstChild.nodeValue = album.title;
