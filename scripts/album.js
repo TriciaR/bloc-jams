@@ -15,7 +15,7 @@ var albumPicasso = {
     { title: 'Green', duration: '3:14' },
     { title: 'Red', duration: '5:01' },
     { title: 'Pink', duration: '3:21' },
-    { title: 'Magenta', duration: '2:15' }    
+    { title: 'Magenta', duration: '2:15' }
   ]
 };
 
@@ -31,7 +31,7 @@ var albumMarconi = {
     { title: 'Ring, ring, ring', duration: '5:01' },
     { title: 'Fits in your pocket', duration: '3:21' },
     { title: 'Can you hear me now?', duration: '3:14' },
-    { title: 'Wrong phone number', duration: '2:15' }    
+    { title: 'Wrong phone number', duration: '2:15' }
   ]
 };
 // Assignment#11
@@ -47,31 +47,27 @@ var albumClementi = {
     { title: ' Sonatina Clementi: Opus 36, No. 2 - Allegretto, Allegretto and Allegro', duration: '3:14' },
     { title: 'Sonatina Clementi: Opus 36, No. 3 - Spiritoso, Un Poco Adagio and Allegro', duration: '5:01' },
     { title: 'Sonatina Clementi: Opus 36, No. 4 - Con Spirito, Andante Con Espressione and Rondo (Allegro Vivace)', duration: '3:21' },
-    { title: 'Sonatina Clementi: Opus 36, No. 5 - Presto, Air Suisse and Rondo', duration: '2:15' }    
+    { title: 'Sonatina Clementi: Opus 36, No. 5 - Presto, Air Suisse and Rondo', duration: '2:15' }
   ]
 };
 
 
-// create a function named createSongRow that generates the song row content 
+// create a function named createSongRow that generates the song row content
 // must declare the objects before the function because the createSongRow function uses the information stored in the album objects.
 
 var createSongRow = function(songNumber, songName, songLength) {
-  var template = 
+  var template =
   '<tr class="album-view-song-item">'
     +'<td class="song-item-number">' + songNumber + '</td>'
     +'<td class="song-item-title">' + songName + '</td>'
     +'<td class="song-item-duration">' + songLength + '</td>'
-    +'</tr>'
-    ;  //why can't this go on above line after the closing </tr> tag?
-    
+    +'</tr>';
     return template;
-
 };
 
 // create a function named setCurrentAlbum that the program calls when the window loads. It will take one of our album objects as an argument and will utilize the object's stored information by injecting it into the template
 var albumTitle = document.getElementsByClassName('album-view-title')[0];
 var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-require('./../album.html')
 var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
 var albumImage = document.getElementsByClassName('album-cover-art')[0];
 var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
@@ -90,17 +86,15 @@ var setCurrentAlbum = function(album) {
   albumSongList.innerHTML = '';
 
   // use a for loop, at #4, to go through all the songs from the specified album object and insert them into the HTML using the  innerHTML property. The createSongRow function is called at each loop, passing in the song number, name, and length arguments from our album object.
-  
   for (var i = 0; i < album.songs.length; i++) {
       albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
   }
 };
- 
+
 window.onload = function() {
      setCurrentAlbum(albumPicasso);
 
   // Add an event listener to the album cover. When a user clicks it, the album page content should toggle between the three album objects: albumPicasso, albumMarconi, and your album object.
-    
     var albums = [albumPicasso, albumMarconi, albumClementi];
     var index = 1;
     // i is declared OUTSIDE of function so it increases by 1 , that state is remembered and carried to next event
@@ -110,6 +104,6 @@ window.onload = function() {
       // click, to set current album @ index i
       if (index == albums.length) {
         index = 0;
-      } 
-    }); 
+      }
+    });
 };
