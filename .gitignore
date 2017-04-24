@@ -3,4 +3,5 @@
 debug.log
 .vs/*
 scripts/album.sublime-workspace
-
+assets\images\Thumbs.db
+.vscode-upload.json

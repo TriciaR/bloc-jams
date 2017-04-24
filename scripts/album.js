@@ -75,8 +75,7 @@ var setCurrentAlbum = function(album) {
     albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
   }
 };
-
-// Elements we'll be adding listeners to - on album.html
+ // Elements we'll be adding listeners to - on album.html
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 
 var songRows = document.getElementsByClassName('album-view-song-item');
