@@ -39,7 +39,6 @@ var createSongRow = function(songNumber, songName, songLength) {
     return $(template);
 
     var $row = $(template);
-       var clickHandler = function() {
       var clickHandler = function() {
         var songNumber = $(this).attr('data-song-number');
 
