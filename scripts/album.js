@@ -37,6 +37,7 @@ var createSongRow = function(songNumber, songName, songLength) {
       +'<td class="song-item-duration">' + songLength + '</td>'
     +'</tr>';
     return $(template);
+  };
 
     var $row = $(template);
       var clickHandler = function() {
@@ -53,7 +54,6 @@ var createSongRow = function(songNumber, songName, songLength) {
           $(this).html(playButtonTemplate);
           currentlyPlayingSong = null;
         }
-      };
       };
 
       var onHover = function(event) {
@@ -76,7 +76,8 @@ var createSongRow = function(songNumber, songName, songLength) {
       $row.find('.song-item-number').click(clickHandler);
 
       $row.hover(onHover, offHover);
-      return $row;
+      
+      // return $row;
 };
 
 var setCurrentAlbum = function(album) {
