@@ -83,7 +83,7 @@ var getSongItem = function(element) {
             return element.querySelector('.song-item-number');
         case 'song-item-title':
         case 'song-item-duration':
-            return findParentByClassName(element, 'album-view-son]g-item').querySelector('.song-item-number');
+            return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
         case 'song-item-number':
             return element;
         default:
@@ -135,6 +135,6 @@ var clickHandler = function(targetElement) {
             songRows[i].addEventListener('click', function (event) {
               clickHandler(event.target);
             });
-           };
-     })
-}
+           }
+     });
+};
