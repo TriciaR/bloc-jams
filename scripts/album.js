@@ -1,3 +1,8 @@
+// QUESTIONS:
+// PLAY & PAUSE - have to hover off then hover on again to change from PLAY to PAUSE o reverse
+
+// PLAYER-BAR can't go PLAY/PAUSE with song list
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
     '<tr class="album-view-song-item">'
