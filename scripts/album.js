@@ -27,7 +27,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   var $row = $(template);
 
   var clickHandler = function() {
-    var songNumber =  $(this).attr('data-song-number');
+    var songNumber =  parseInt($(this).attr('data-song-number'));
       if (currentlyPlayingSongNumber !== null) {
       // Revert to song number for currently playing song because user started playing new song.
         var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber)
