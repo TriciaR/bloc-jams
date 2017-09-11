@@ -11,6 +11,13 @@ var setSong = function (songNumber) {
         preload: true
     });
 
+    setVolume(currentVolume);
+};
+
+var setVolume = function(volume) {
+    if (currentSoundFile) {
+        currentSoundFile.setVolume(volume);
+    }
 };
 
 var getSongNumberCell = function(number) {
@@ -163,6 +170,8 @@ var currentlyPlayingSongNumber = parseInt(null);
 var currentSongFromAlbum = null;
 
 var currentSoundFile = null;
+
+var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 
