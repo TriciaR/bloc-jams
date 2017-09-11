@@ -1,6 +1,9 @@
 var setSong = function (songNumber) {
+    if (currentSoundFile) {
+        currentSoundFile.stop();
+    };
     currentlyPlayingSongNumber = parseInt(songNumber);
-    currentSongFromAlbum = currrentAlbum.songs[songNumber-1];
+    currentSongFromAlbum = currentAlbum.songs[songNumber-1];
     // @currentSoundFile ... we assign a new Buzz sound object. We've passed the audio file via the audioUrl property on the currentSongFromAlbum object
     currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
         // we've passed in a settings object that has two properties defined, formats and preload. formats is an array of strings with acceptable audio formats. We've only included the 'mp3' string because all of our songs are mp3s. Setting the preload property to true tells Buzz that we want the mp3s loaded as soon as the page load
@@ -112,21 +115,6 @@ var updatePlayerBarSong = function() {
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
-var nextSong = function() {
-    var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
-    currentSongIndex++;
-    if (currentSongIndex >= currentAlbum.songs.length) {
-    currentSongIndex = 0;
-    }
-    var lastSongNumber = parseInt(currentlyPlayingSongNumber);
-    setSong(currentSongIndex + 1);
-    updatePlayerBarSong();
-    var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
-    $nextSongNumberCell.html(pauseButtonTemplate);
-    $lastSongNumberCell.html(lastSongNumber);
-};
-
 var previousSong = function() {
     var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
     currentSongIndex--;
@@ -135,11 +123,28 @@ var previousSong = function() {
     }
     var lastSongNumber = parseInt(currentlyPlayingSongNumber);
     setSong(currentSongIndex + 1);
+    currentSoundFile.play();
     updatePlayerBarSong();
     $('.main-controls .play-pause').html(playerBarPauseButton);
     var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
     $previousSongNumberCell.html(pauseButtonTemplate);
+    $lastSongNumberCell.html(lastSongNumber);
+};
+
+var nextSong = function() {
+    var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
+    currentSongIndex++;
+    if (currentSongIndex >= currentAlbum.songs.length) {
+    currentSongIndex = 0;
+    }
+    var lastSongNumber = parseInt(currentlyPlayingSongNumber);
+    setSong(currentSongIndex + 1);
+    currentSoundFile.play();
+    updatePlayerBarSong();
+    var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+    $nextSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
 };
 
