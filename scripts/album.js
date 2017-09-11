@@ -1,6 +1,13 @@
 var setSong = function (songNumber) {
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currrentAlbum.songs[songNumber-1];
+    // @currentSoundFile ... we assign a new Buzz sound object. We've passed the audio file via the audioUrl property on the currentSongFromAlbum object
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+        // we've passed in a settings object that has two properties defined, formats and preload. formats is an array of strings with acceptable audio formats. We've only included the 'mp3' string because all of our songs are mp3s. Setting the preload property to true tells Buzz that we want the mp3s loaded as soon as the page load
+        formats: [ 'mp3' ],
+        preload: true
+    });
+
 };
 
 var getSongNumberCell = function(number) {
