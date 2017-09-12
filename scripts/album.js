@@ -188,10 +188,12 @@ var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
 var $togglePlayPause = $('.main-controls .play-pause');
+
 var togglePlayFromPlayerBar = function () {
 
 };
-Use a number of Buzz methods to manage audio file playback – such as  .play(), .pause(), .stop(), isPaused(), 
+
+// Use a number of Buzz methods to manage audio file playback – such as  .play(), .pause(), .stop(), isPaused(), 
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
