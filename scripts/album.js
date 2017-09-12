@@ -187,9 +187,9 @@ var $previousButton = $('.main-controls .previous');
 
 var $nextButton = $('.main-controls .next');
 
-var $togglePlayPause = $('.main-controls .play-pause');
+// var $togglePlayPause = $('.main-controls .play-pause');
 
-var togglePlayFromPlayerBar = function () {
+// var togglePlayFromPlayerBar = function () {
 
 };
 
@@ -199,6 +199,6 @@ $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
-    playerBarPauseButton.click(togglePlayFromPlayerBar);
-    playerBarPauseButton.click(togglePlayFromPlayerBar);
+    // playerBarPauseButton.click(togglePlayFromPlayerBar);
+    // playerBarPauseButton.click(togglePlayFromPlayerBar);
 });
