@@ -35,22 +35,32 @@ var createSongRow = function(songNumber, songName, songLength) {
     var $row = $(template);
 
     var clickHandler = function() {
+
         var songNumber = parseInt($(this).attr('data-song-number'));
 
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+            // ~~~~~~~~~~WHERE DID I MISS THIS LINE44~~~~~~~~      
+            currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);      
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
         }
         if (currentlyPlayingSongNumber !== songNumber) {
-            $(this).html(pauseButtonTemplate);
             setSong(songNumber);
+            currentSoundFile.play();
+            $(this).html(pauseButtonTemplate);
+            currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
             updatePlayerBarSong();
         } else if (currentlyPlayingSongNumber === songNumber) {
-            $(this).html(playButtonTemplate);
-            $('.main-controls .play-pause').html(playerBarPlayButton);
-            setSong(null);
+            if (currentSoundFile.isPaused()) {
+                $(this).html(pauseButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPauseButton);
+                currentSoundFile.play();
+            } else {
+                $(this).html(playButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPlayButton);
+                currentSoundFile.pause();   
+            }         
         }
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
     };
 
     var onHover = function(event) {
@@ -177,8 +187,16 @@ var $previousButton = $('.main-controls .previous');
 
 var $nextButton = $('.main-controls .next');
 
+var $togglePlayPause = $('.main-controls .play-pause');
+var togglePlayFromPlayerBar = function () {
+
+};
+Use a number of Buzz methods to manage audio file playback – such as  .play(), .pause(), .stop(), isPaused(), 
+
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    playerBarPauseButton.click(togglePlayFromPlayerBar);
+    playerBarPauseButton.click(togglePlayFromPlayerBar);
 });
