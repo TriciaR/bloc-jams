@@ -118,6 +118,9 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+// @CP21 - updating Seek Bars
+var updateSeekBarPercentage = function ($) 
+
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
@@ -216,7 +219,6 @@ var togglePlayFromPlayerBar = function () {
     }
 };
 
-// Use a number of Buzz methods to manage audio file playback – such as  .play(), .pause(), .stop(), isPaused(), 
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
