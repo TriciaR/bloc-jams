@@ -194,13 +194,11 @@ var $nextButton = $('.main-controls .next');
 var togglePlayerBarPlayPause = $('.main-controls .play-pause');
 
 var togglePlayFromPlayerBar = function () {
- //   var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
 
     if (togglePlayerBarPlayPause.html() === null) {
 
         setSong(1);
         currentSoundFile.play();
-        // updatePlayerBarSong();
         togglePlayerBarPlayPause.html(playerBarPauseButton);
         currentlyPlayingCell = getSongNumberCell(1);
         currentlyPlayingCell.html(pauseButtonTemplate);
