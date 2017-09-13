@@ -194,7 +194,6 @@ var $nextButton = $('.main-controls .next');
 var togglePlayerBarPlayPause = $('.main-controls .play-pause');
 
 var togglePlayFromPlayerBar = function () {
-
     if (togglePlayerBarPlayPause.html() === null) {
 
         setSong(1);
