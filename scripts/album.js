@@ -1,7 +1,7 @@
 var setSong = function (songNumber) {
     if (currentSoundFile) {
         currentSoundFile.stop();
-    };
+    }
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber-1];
     // @currentSoundFile ... we assign a new Buzz sound object. We've passed the audio file via the audioUrl property on the currentSongFromAlbum object
@@ -70,7 +70,6 @@ var createSongRow = function(songNumber, songName, songLength) {
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(playButtonTemplate);
         }
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
     };
 
     var offHover = function(event) {
@@ -80,7 +79,6 @@ var createSongRow = function(songNumber, songName, songLength) {
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
         }
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
     };
 
     $row.find('.song-item-number').click(clickHandler);
@@ -135,14 +133,20 @@ var updatePlayerBarSong = function() {
 var previousSong = function() {
     var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
     currentSongIndex--;
+
     if (currentSongIndex < 0) {
         currentSongIndex = currentAlbum.songs.length - 1;
     }
     var lastSongNumber = parseInt(currentlyPlayingSongNumber);
+
     setSong(currentSongIndex + 1);
+
     currentSoundFile.play();
+
     updatePlayerBarSong();
+    
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    
     var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
     $previousSongNumberCell.html(pauseButtonTemplate);
@@ -187,10 +191,32 @@ var $previousButton = $('.main-controls .previous');
 
 var $nextButton = $('.main-controls .next');
 
-// var $togglePlayPause = $('.main-controls .play-pause');
+var togglePlayerBarPlayPause = $('.main-controls .play-pause');
 
-// var togglePlayFromPlayerBar = function () {
+var togglePlayFromPlayerBar = function () {
+ //   var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
 
+    if (togglePlayerBarPlayPause.html() === null) {
+
+        setSong(1);
+        currentSoundFile.play();
+        // updatePlayerBarSong();
+        togglePlayerBarPlayPause.html(playerBarPauseButton);
+        currentlyPlayingCell = getSongNumberCell(1);
+        currentlyPlayingCell.html(pauseButtonTemplate);
+    } else {
+        //if is current soundfile + .isPaused
+        if (currentSoundFile.isPaused()) {
+            currentSoundFile.play();
+            togglePlayerBarPlayPause.html(playerBarPauseButton);
+            currentlyPlayingCell.html(pauseButtonTemplate);
+        } else {
+          //if is current soundfile + .playing
+          currentSoundFile.pause();
+          togglePlayerBarPlayPause.html(playerBarPlayButton);
+          currentlyPlayingCell.html(playButtonTemplate);
+        }
+    }
 };
 
 // Use a number of Buzz methods to manage audio file playback – such as  .play(), .pause(), .stop(), isPaused(), 
@@ -199,6 +225,5 @@ $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
-    // playerBarPauseButton.click(togglePlayFromPlayerBar);
-    // playerBarPauseButton.click(togglePlayFromPlayerBar);
+    togglePlayerBarPlayPause.click(togglePlayFromPlayerBar);
 });
