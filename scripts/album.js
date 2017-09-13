@@ -193,16 +193,17 @@ var $nextButton = $('.main-controls .next');
 
 var togglePlayerBarPlayPause = $('.main-controls .play-pause');
 
+// ====- please help with problem when PlayerBarPlay>NextButton>Play>Pause is clicked (Green AND blue/another song have the play icon on thier number row) ====== //
 var togglePlayFromPlayerBar = function () {
- //   var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
 
-    if (togglePlayerBarPlayPause.html() === null) {
+    currentlyPlayingCell = getSongNumberCell(1);
 
+    if (!currentSoundFile) {
         setSong(1);
+        updatePlayerBarSong();
         currentSoundFile.play();
-        // updatePlayerBarSong();
         togglePlayerBarPlayPause.html(playerBarPauseButton);
-        currentlyPlayingCell = getSongNumberCell(1);
+
         currentlyPlayingCell.html(pauseButtonTemplate);
     } else {
         //if is current soundfile + .isPaused
