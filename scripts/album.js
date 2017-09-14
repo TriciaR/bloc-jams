@@ -117,7 +117,7 @@ var setCurrentAlbum = function(album) {
 };
 
 // @CP21 - updating Seek Bars
-var updateSeekBarPercentage = function ($) 
+var updateSeekBarPercentage = function (qq  ) 
 
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
