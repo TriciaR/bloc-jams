@@ -117,6 +117,19 @@ var setCurrentAlbum = function(album) {
 };
 
 // @CP21 - updating Seek Bars
+var updateSeekBarWhileSongPlays = function() {
+    if (currentSoundFile) {
+        // bind() the timeupdate event to  currentSoundFile. timeupdate is a custom Buzz event that fires repeatedly while time elapses during song playback.
+        currentSoundFile.bind('timeupdate', function(event) {
+            // use a new method for calculating the  seekBarFillRatio. We use Buzz's getTime() method to get the current time of the song and the  getDuration() method for getting the total length of the song. Both values return time in seconds
+            var seekBarFillRatio = this.getTime() / this.getDuration();
+            var $seekBar = $('.seek-control .seek-bar');
+
+            updateSeekPercentage($seekBar, seekBarFillRatio);
+        });
+    }
+};
+
 var updateSeekBarPercentage = function ($seekBar, seekBarFillRatio) {
     var offsetXPercent = seekBarFillRatio * 100;  //use the JS  Math.max() function to make sure % isn't less than zero and the Math.min() function to make sure it doesn't exceed 100
     offsetXPercent = Math.min(0, offsetXPercent);
