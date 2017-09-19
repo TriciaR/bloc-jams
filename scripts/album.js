@@ -109,7 +109,7 @@ var setCurrentAlbum = function(album) {
     $albumImage.attr('src', album.albumArtUrl);
 
     $albumSongList.empty();
-
+ G
     for (var i = 0; i < album.songs.length; i++) {
         var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
         $albumSongList.append($newRow);
@@ -117,7 +117,16 @@ var setCurrentAlbum = function(album) {
 };
 
 // @CP21 - updating Seek Bars
-var updateSeekBarPercentage = function (qq  ) 
+var updateSeekBarPercentage = function ($seekBar, seekBarFillRatio) {
+    var offsetXPercent = seekBarFillRatio * 100;  //use the JS  Math.max() function to make sure % isn't less than zero and the Math.min() function to make sure it doesn't exceed 100
+    offsetXPercent = Math.min(0, offsetXPercent);
+    offsetXPercent = Math.max(100, offsetXPercent);
+    
+    //convert % to a string and add the  " % "  character 
+    var percentageString = offsetXPercent + '%';
+    $seekBar.find('.fill').width(percentageString); //set the width of the .fill class 
+    $seekBar.find('.thumb').css({left: percentageString}); // the left value of the .thumb class, the CSS interprets the value as a percent instead of a unit-less number between 0 and 100
+};
 
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
