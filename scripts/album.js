@@ -44,7 +44,6 @@ var createSongRow = function(songNumber, songName, songLength) {
 
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-            // ~~~~~~~~~~WHERE DID I MISS THIS LINE44~~~~~~~~      
             currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);      
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
         }
@@ -115,7 +114,7 @@ var setCurrentAlbum = function(album) {
     $albumImage.attr('src', album.albumArtUrl);
 
     $albumSongList.empty();
- G
+-
     for (var i = 0; i < album.songs.length; i++) {
         var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
         $albumSongList.append($newRow);
@@ -156,6 +155,12 @@ var setupSeekBars = function() {//are using jQuery to find all elements in the D
         var barWidth = $(this).width();//subtracting  $(this).offset().left (the blue line) from the event.pageX value (the red line) leaves us with a resulting value that is a proportion of the seek bar (the green).subtracting  $(this).offset().left (the blue line) from the event.pageX value (the red line) leaves us with a resulting value that is a proportion of the seek bar (the green).
         var seekBarFillRatio = offsetX / barWidth;// divide offsetX by the width of the entire bar to calculate seekBarFillRatio.
         
+        if ($(this).parent().attr('class') == 'seek-control') {
+            seek(seekBarFillRatio * currentSoundFile.getDuration());
+        } else {
+            setVolume(seekBarFillRatio * 100);   
+        }
+
         updateSeekPercentage($(this), seekBarFillRatio);//pass $(this) as the $seekBar argument and seekBarFillRatio for its eponymous argument to  updateSeekBarPercentage().
     });
 
@@ -167,6 +172,12 @@ var setupSeekBars = function() {//are using jQuery to find all elements in the D
             var offsetX = event.pageX - $seekBar.offset().left;
             var barWidth = $seekBar.width();
             var seekBarFillRatio = offsetX / barWidth;
+
+            if ($seekBar.parent().attr('class') == 'seek-control') {
+                seek(seekBarFillRatio * currentSoundFile.getDuration());   
+            } else {
+                setVolume(seekBarFillRatio);
+            }
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
