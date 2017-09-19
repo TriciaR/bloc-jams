@@ -121,11 +121,24 @@ var updateSeekBarPercentage = function ($seekBar, seekBarFillRatio) {
     var offsetXPercent = seekBarFillRatio * 100;  //use the JS  Math.max() function to make sure % isn't less than zero and the Math.min() function to make sure it doesn't exceed 100
     offsetXPercent = Math.min(0, offsetXPercent);
     offsetXPercent = Math.max(100, offsetXPercent);
-    
+
     //convert % to a string and add the  " % "  character 
     var percentageString = offsetXPercent + '%';
     $seekBar.find('.fill').width(percentageString); //set the width of the .fill class 
     $seekBar.find('.thumb').css({left: percentageString}); // the left value of the .thumb class, the CSS interprets the value as a percent instead of a unit-less number between 0 and 100
+};
+
+var setupSeekBars = function() {
+    var $seekBars = $('.player-bar .seek-bar');
+
+    $seekBars.click(function(event) {
+        //  new property on the event object called  pageX. This is a jQuery-specific event value, which holds the X (or horizontal) coordinate at which the event occurred (think of the X-Y coordinate plane that you hated in Algebra class).
+        var offsetX = event.pageX - $(this).offset().left; //subtract the offset() of the seek bar held in $(this) from the left side. 
+        var barWidth = $(this).width();//subtracting  $(this).offset().left (the blue line) from the event.pageX value (the red line) leaves us with a resulting value that is a proportion of the seek bar (the green).subtracting  $(this).offset().left (the blue line) from the event.pageX value (the red line) leaves us with a resulting value that is a proportion of the seek bar (the green).
+        var seekBarFillRatio = offsetX / barWidth;// divide offsetX by the width of the entire bar to calculate seekBarFillRatio.
+        
+        updateSeekPercentage($(this), seekBarFillRatio);//pass $(this) as the $seekBar argument and seekBarFillRatio for its eponymous argument to  updateSeekBarPercentage().
+    });
 };
 
 var trackIndex = function(album, song) {
@@ -228,6 +241,7 @@ var togglePlayFromPlayerBar = function () {
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
+    setupSeekBars();//add click functionality to seek bars
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
     togglePlayerBarPlayPause.click(togglePlayFromPlayerBar);
