@@ -120,16 +120,20 @@ bottom: 1.1rem;
   border-radius: 50%;
   cursor: pointer;
   -webkit-transition: all 100ms ease-in-out;
-    -moz-transition: all 100ms ease-in-out;
-          transition: all 100ms ease-in-out;
- }
+  -moz-transition: all 100ms ease-in-out;
+  transition: width 100ms ease-in-out,
+    height 100ms ease-in-out,
+    margin-top 100ms ease-in-out,
+    margin-left 100ms ease-in-out;
+
+}
 
 .seek-bar:hover .thumb {
   width: 1.1rem;
   height: 1.1rem;
   margin-top: -0.5rem;
   margin-left: -0.5rem;
- }
+}
 
 .player-bar .volume {
   width: 25%;
@@ -147,8 +151,8 @@ bottom: 1.1rem;
   width: 5.75rem;
   vertical-align: middle;
 }
- 
- @media (max-width: 640px) {
+
+@media (max-width: 640px) {
   .player-bar {
     padding: 1rem;
     background-color: rgba(0,0,0,0.6);
