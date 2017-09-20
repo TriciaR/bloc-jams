@@ -4,9 +4,9 @@ var setSong = function (songNumber) {
     }
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber-1];
-    // @currentSoundFile ... we assign a new Buzz sound object. We've passed the audio file via the audioUrl property on the currentSongFromAlbum object
+
     currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
-        // we've passed in a settings object that has two properties defined, formats and preload. formats is an array of strings with acceptable audio formats. We've only included the 'mp3' string because all of our songs are mp3s. Setting the preload property to true tells Buzz that we want the mp3s loaded as soon as the page load
+
         formats: [ 'mp3' ],
         preload: true
     });
@@ -40,7 +40,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-            // ~~~~~~~~~~WHERE DID I MISS THIS LINE44~~~~~~~~      
+
             currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);      
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
         }
@@ -193,9 +193,7 @@ var $nextButton = $('.main-controls .next');
 
 var togglePlayerBarPlayPause = $('.main-controls .play-pause');
 
-// ====- please help with problem when PlayerBarPlay>NextButton>Play>Pause is clicked (Green AND blue/another song have the play icon on thier number row) ====== //
 var togglePlayFromPlayerBar = function () {
-
     currentlyPlayingCell = getSongNumberCell(1);
 
     if (!currentSoundFile) {
@@ -206,21 +204,17 @@ var togglePlayFromPlayerBar = function () {
 
         currentlyPlayingCell.html(pauseButtonTemplate);
     } else {
-        //if is current soundfile + .isPaused
         if (currentSoundFile.isPaused()) {
             currentSoundFile.play();
             togglePlayerBarPlayPause.html(playerBarPauseButton);
             currentlyPlayingCell.html(pauseButtonTemplate);
         } else {
-          //if is current soundfile + .playing
-          currentSoundFile.pause();
-          togglePlayerBarPlayPause.html(playerBarPlayButton);
-          currentlyPlayingCell.html(playButtonTemplate);
+            currentSoundFile.pause();
+            togglePlayerBarPlayPause.html(playerBarPlayButton);
+            currentlyPlayingCell.html(playButtonTemplate);
         }
     }
 };
-
-// Use a number of Buzz methods to manage audio file playback – such as  .play(), .pause(), .stop(), isPaused(), 
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
