@@ -4,7 +4,6 @@ var setSong = function (songNumber) {
     }
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber-1];
-        console.log(songNumber);
     currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
 
         formats: [ 'mp3' ],
@@ -30,7 +29,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<td class="song-item-number" data-song-number="' + songNumber + '">' +
         songNumber + '</td>' +
         '<td class="song-item-title">' + songName + '</td>' +
-        '<td class="song-item-duration">' + songLength + '</td>' +
+        '<td class="song-item-duration">' + filterTimeCode(songLength) + '</td>' +
         '</tr>';
     var $row = $(template);
 
@@ -46,7 +45,6 @@ var createSongRow = function(songNumber, songName, songLength) {
         }
         if (currentlyPlayingSongNumber !== songNumber) {
             setSong(songNumber);
-            console.log("different song");
             currentSoundFile.play();
             $(this).html(pauseButtonTemplate);
             currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
@@ -55,12 +53,10 @@ var createSongRow = function(songNumber, songName, songLength) {
             if (currentSoundFile.isPaused()) {
                 $(this).html(pauseButtonTemplate);
                 $('.main-controls .play-pause').html(playerBarPauseButton);
-                console.log("is paused");
                 currentSoundFile.play();
             } else {
                 $(this).html(playButtonTemplate);
                 $('.main-controls .play-pause').html(playerBarPlayButton);
-                console.log("playing");
                 currentSoundFile.pause();   
             }         
         }
@@ -163,7 +159,6 @@ var setupSeekBars = function() {
 var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
-
     
 var updatePlayerBarSong = function() {
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
@@ -171,6 +166,41 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - "+ currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
+
+var currentTimeInPlayerBar = function (currentTime) {
+    $('.current-time').text(filterTimeCode(currentTime));    // -----sets the text of the element of .current-time class = current time in the song. 
+    console.log(currentTime);
+    console.log(currentTimeInPlayerBar());
+    //----- Add the method to updateSeekBarWhileSongPlays() so the current time updates with song playback.
+    // ~~~~~ Wrap the arguments passed to setCurrentTimeInPlayerBar() in a filterTimeCode() call so the time output below the seek bar is formatted.
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    $('.total-time').text(filterTimeCode(totalTime));  //--- sets the text of the element with the .total-time class to the length of the song.
+    console.log(totalTime);
+    console.log(setTotalTimeInPlayerBar());
+    //------Add the method to updatePlayerBarSong() so the total time is set when a song first plays.
+    //	~~~~ Wrap the arguments passed setTotalTimeInPlayerBar() in a filterTimeCode() call so the time output below the seek bar is formatted.
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    timeInSeconds = currentAlbum.songs[songNumber - 1].duration;
+    setTotalTimeInPlayerBar();
+    console.log(setTotalTimeInPlayerBar());
+    
+    var songToTime = parseFloat(timeInSeconds); //---Use the parseFloat() method to get the seconds in number form.
+    console.log(songToTime);
+
+    var getSongInMinutes = Math.floor(songToTime / 60);  //------ Store variables for whole seconds and whole minutes (hint: use Math.floor() to round numbers down).
+    console.log(getSongInMinutes);
+
+    var getSongInSeconds = Math.floor(getSongInMinutes % 60);  // ----Find remainder of song in seconds
+    console.log(getSongInSeconds);
+
+    return getSongInMinutes + ":" + getSongInSeconds;//------ Return the time in the format X:XX
+};
+
+//	++ FINISH AS-21 ------ Wrap the songLength variable in createSongRow() in a filterTimeCode() call so the time lengths are formatted.
 
 var previousSong = function() {
     var currentSongIndex = parseInt(trackIndex(currentAlbum, currentSongFromAlbum));
