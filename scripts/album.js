@@ -5,7 +5,6 @@ var setSong = function (songNumber) {
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber-1];
     currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
-
         formats: [ 'mp3' ],
         preload: true
     });
@@ -128,9 +127,10 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            setCurrentTimeInPlayerBar(this.getTime());
         });
+        
     }
-    setCurrentTimeInPlayerBar(currentSoundFile.getTime());
 };
 
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
@@ -198,19 +198,7 @@ var updatePlayerBarSong = function() {
 };
 
 var setCurrentTimeInPlayerBar = function (currentTime) {
-    // var $currentTime = $('.currently-playing .current-time');
-
-    currentTime = $('.currently-playing .current-time').html(filterTimeCode(currentSoundFile.getTime()));
-
-    if (currentSoundFile) {
-        currentSoundFile.setCurrentTimeInPlayerBar(currentTime);
-    }
-    // currentSoundFile.bind('timeupdate', function () {
-    //     var timer = buzz.toTimer(this.getTime());
-    //     document.getElementById("timer") .innerHTML = timer;
-    // });    
-    console.log(currentTime);
-    return currentTime;
+    $('.currently-playing .current-time').html(filterTimeCode(currentSoundFile.getTime()));
 };
 
 var setTotalTimeInPlayerBar = function(totalTime) {      
@@ -223,13 +211,10 @@ var filterTimeCode = function(timeInSeconds) {
 
     var songToTime = parseFloat(parseInt(timeInSeconds)); //get seconds in number form.
     parseFloat(songToTime);
-    console.log(songToTime);
 
     var getSongInMinutes = Math.floor(songToTime / 60);  //store vars for whole minutes (hint: use Math.floor() to round numbers down).
-    console.log(getSongInMinutes);
 
     var getSongInSeconds = Math.floor(songToTime % 60);  //get remainder(%) of song in seconds
-    console.log(getSongInSeconds);
 
     return getSongInMinutes + ":" + getSongInSeconds;// return the time in the format X:XX
 };
