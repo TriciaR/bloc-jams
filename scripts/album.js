@@ -129,7 +129,7 @@ var updateSeekBarWhileSongPlays = function() {
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
-    };
+    }
     setCurrentTimeInPlayerBar(currentSoundFile.getTime());
 };
 
@@ -192,7 +192,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - "+ currentAlbum.artist);
-    $('.main-controls .play-pause').html(playerBarPauseButton)
+    $('.main-controls .play-pause').html(playerBarPauseButton);
     
     setTotalTimeInPlayerBar(currentSoundFile.getDuration());
 };
@@ -221,17 +221,17 @@ var setTotalTimeInPlayerBar = function(totalTime) {
 
 var filterTimeCode = function(timeInSeconds) {
 
-    var songToTime = parseFloat(parseInt(timeInSeconds)); //---Use the parseFloat() method to get the seconds in number form.
+    var songToTime = parseFloat(parseInt(timeInSeconds)); //get seconds in number form.
     parseFloat(songToTime);
     console.log(songToTime);
 
-    var getSongInMinutes = Math.floor(songToTime / 60);  //------ Store variables for whole seconds and whole minutes (hint: use Math.floor() to round numbers down).
+    var getSongInMinutes = Math.floor(songToTime / 60);  //store vars for whole minutes (hint: use Math.floor() to round numbers down).
     console.log(getSongInMinutes);
 
-    var getSongInSeconds = Math.floor(songToTime % 60);  // ----Find remainder of song in seconds
+    var getSongInSeconds = Math.floor(songToTime % 60);  //get remainder(%) of song in seconds
     console.log(getSongInSeconds);
 
-    return getSongInMinutes + ":" + getSongInSeconds;//------ Return the time in the format X:XX
+    return getSongInMinutes + ":" + getSongInSeconds;// return the time in the format X:XX
 };
 
 var previousSong = function() {
